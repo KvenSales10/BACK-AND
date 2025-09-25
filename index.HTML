@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Conversor para Fahrenheit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        input, button {
+            font-size: 16px;
+            padding: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Conversor de Celsius para Fahrenheit</h1>
+
+    <label for="celsius">Temperatura em Celsius:</label>
+    <input type="number" id="celsius">
+    <button onclick="converter()">Converter</button>
+
+    <p id="resultado"></p>
+  <script src="JS.JS"></script>
+    <script>
+        function converter() {
+            const celsius = parseFloat(document.getElementById('celsius').value);
+            const resultado = document.getElementById('resultado');
+
+            if (isNaN(celsius)) {
+                resultado.textContent = "Por favor, digite um valor válido.";
+                return;
+            }
+
+            const fahrenheit = (celsius * 9 / 5) + 32;
+            resultado.textContent = `${celsius}°C = ${fahrenheit.toFixed(2)}°F`;
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Par ou Ímpar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input, button {
+      font-size: 16px;
+      padding: 5px;
+      margin-top: 10px;
+    }
+    #resultado {
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Verificar se o número é Par ou Ímpar</h1>
+
+  <label for="numero">Digite um número:</label>
+  <input type="number" id="numero">
+  <button onclick="verificar()">Verificar</button>
+
+  <p id="resultado"></p>
+
+  <script>
+    function verificar() {
+      const numero = parseInt(document.getElementById('numero').value);
+      const resultado = document.getElementById('resultado');
+
+      if (isNaN(numero)) {
+        resultado.textContent = "Por favor, digite um número válido.";
+        return;
+      }
+
+      if (numero % 2 === 0) {
+        resultado.textContent = `${numero} é PAR ✅`;
+      } else {
+        resultado.textContent = `${numero} é ÍMPAR 🔢`;
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <title>Comparar Dois Números</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      max-width: 480px;
+      margin: 40px auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      background: #f8fafc;
+    }
+    h1 { font-size: 22px; margin-bottom: 10px; }
+    label { display:block; margin-top:12px; }
+    input[type="number"]{
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top:6px;
+      box-sizing: border-box;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: white;
+    }
+    button {
+      margin-top: 14px;
+      padding: 10px 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #2563eb;
+      color: white;
+    }
+    #resultado {
+      margin-top: 16px;
+      font-weight: 700;
+      padding: 10px;
+      border-radius: 6px;
+      background: #eef2ff;
+      color: #1e293b;
+    }
+    .erro {
+      background: #fee2e2;
+      color: #7f1d1d;
+    }
+  </style>
+</head>
+<body>
+  <h1>Comparar Dois Números</h1>
+
+  <label for="num1">Primeiro número:</label>
+  <input id="num1" type="number" step="any" placeholder="Ex: 10">
+
+  <label for="num2">Segundo número:</label>
+  <input id="num2" type="number" step="any" placeholder="Ex: 5">
+
+  <button id="btnComparar">Comparar</button>
+  <button id="btnLimpar" style="background:#94a3b8; margin-left:8px;">Limpar</button>
+
+  <div id="resultado" aria-live="polite"></div>
+
+  <script>
+    const input1 = document.getElementById('num1');
+    const input2 = document.getElementById('num2');
+    const btn = document.getElementById('btnComparar');
+    const btnLimpar = document.getElementById('btnLimpar');
+    const resultado = document.getElementById('resultado');
+
+    function mostrar(text, isErro = false) {
+      resultado.textContent = text;
+      resultado.className = isErro ? 'erro' : '';
+    }
+
+    btn.addEventListener('click', () => {
+      // Lê valores (aceita decimais)
+      const a = parseFloat(input1.value);
+      const b = parseFloat(input2.value);
+
+      // Validação
+      if (input1.value.trim() === '' || input2.value.trim() === '') {
+        mostrar('Por favor, preencha os dois campos.', true);
+        return;
+      }
+      if (Number.isNaN(a) || Number.isNaN(b)) {
+        mostrar('Por favor, insira números válidos.', true);
+        return;
+      }
+
+      // Comparação
+      if (a > b) {
+        mostrar(`${a} é maior que ${b}.`);
+      } else if (b > a) {
+        mostrar(`${b} é maior que ${a}.`);
+      } else {
+        mostrar(`Os dois números são iguais (${a}).`);
+      }
+    });
+
+    btnLimpar.addEventListener('click', () => {
+      input1.value = '';
+      input2.value = '';
+      mostrar('');
+      input1.focus();
+    });
+
+    // Permite usar Enter no segundo campo para comparar
+    input2.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') btn.click();
+    });
+  </script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Contar Números Pares</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 500px; margin: auto; }
+    input, button { font-size: 16px; padding: 6px; margin-top: 8px; }
+    #resultado { margin-top: 12px; font-weight: bold; }
+    #lista { margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Contar Números Pares</h1>
+  <p>Digite 10 números, um de cada vez:</p>
+
+  <input type="number" id="numero" placeholder="Digite um número">
+  <button id="btnAdicionar">Adicionar</button>
+
+  <p id="contador">Números digitados: 0 / 10</p>
+  <p id="resultado"></p>
+  <ul id="lista"></ul>
+
+  <script>
+    const numeros = [];
+    const input = document.getElementById('numero');
+    const btn = document.getElementById('btnAdicionar');
+    const contador = document.getElementById('contador');
+    const resultado = document.getElementById('resultado');
+    const lista = document.getElementById('lista');
+
+    btn.addEventListener('click', () => {
+      const num = parseInt(input.value);
+
+      if (isNaN(num)) {
+        alert("Digite um número válido!");
+        return;
+      }
+
+      numeros.push(num);
+
+      // Atualiza a lista de números digitados
+      const li = document.createElement('li');
+      li.textContent = `${num} ${num % 2 === 0 ? '(Par)' : '(Ímpar)'}`;
+      lista.appendChild(li);
+
+      input.value = '';
+      input.focus();
+
+      contador.textContent = `Números digitados: ${numeros.length} / 10`;
+
+      if (numeros.length === 10) {
+        const pares = numeros.filter(n => n % 2 === 0).length;
+        resultado.textContent = `Quantidade de números pares: ${pares}`;
+        btn.disabled = true;
+        input.disabled = true;
+      }
+    });
+
+    // Permitir usar Enter para adicionar número
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') btn.click();
+    });
+  </script>
+</body>
+</html>
+
+
